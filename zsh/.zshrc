@@ -1,5 +1,21 @@
 # If you come from bash you might have to change your $PATH.
 
+# tramp hacks
+if [[ "$TERM" == "dumb" ]]
+then
+  unsetopt zle
+  unsetopt prompt_cr
+  unsetopt prompt_subst
+  if whence -w precmd >/dev/null; then
+      unfunction precmd
+  fi
+  if whence -w preexec >/dev/null; then
+      unfunction preexec
+  fi
+  PS1='$ '
+fi
+
+
 export GOPATH=$HOME/go:/Users/zach/Documents/fall19/class/distributed-systems/4113
 #path+=('$GOPATH/bin')
 export PATH=$GOPATH/bin:$PATH

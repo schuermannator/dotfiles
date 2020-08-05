@@ -26,6 +26,18 @@ end
 set rtp+=/usr/local/opt/fzf
 set rtp+=/usr/bin/fzf
 
+
+" Enable filetype plugins
+filetype plugin on
+filetype plugin indent on
+
+" (unused) Set to auto read when a file is changed from the outside
+" set autoread                 
+
+let mapleader ="\<Space>"      
+let g:maplxeader ="\<Space>"    
+
+
 """ old/unused
 " set guioptions-=T  " remove menu bar
 " colorscheme peachpuff
@@ -111,6 +123,12 @@ inoremap <silent><expr> <c-.> coc#refresh()
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Or use `complete_info` if your vim support it, like:
 inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <leader> d to trigger gotodef
+nmap <silent> <leader>d <Plug>(coc-definition)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 let g:fzf_layout = { 'down': '~30%' }
 command! -bang -nargs=* Rg
@@ -123,15 +141,6 @@ command! -bang -nargs=* Rg
 " Golang
 let g:go_bin_path = expand("~/dev/go/bin")
 
-" Enable filetype plugins
-filetype plugin on
-filetype plugin indent on
-
-" (unused) Set to auto read when a file is changed from the outside
-" set autoread                 
-
-let mapleader ="\<Space>"      
-let g:maplxeader ="\<Space>"    
 
 " <leader>s for Rg search
 nnoremap <leader>s :Rg<CR>

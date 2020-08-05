@@ -1,35 +1,35 @@
 brew_install() {
-    if !command -v $1 >/dev/null 2>&1; then
+    if command -v $1 >/dev/null 2>&1; then
+        tell "Found $1: $($1 --version)"
+    else
         tell "Installing $1." 
         brew install $1
-    else
-        tell "Found $1: $($1 --version)"
     fi
 }
 
 install_mac() {
 
     ### Dependencies
-    if !command -v brew >/dev/null 2>&1; then
+    if command -v brew >/dev/null 2>&1; then
+        tell "Found brew: $(brew --version)"
+    else
         tell "Installing Homebrew." 
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    else
-        tell "Found brew: $(brew --version)"
     fi
     brew update
 
-    if !command -v git >/dev/null 2>&1; then
+    if command -v git >/dev/null 2>&1; then
+        tell "Found git: $(git --version)"
+    else
         tell "Installing git." 
         brew install git
-    else
-        tell "Found git: $(git --version)"
     fi
 
-    if !command -v stow >/dev/null 2>&1; then
+    if command -v stow >/dev/null 2>&1; then
+        tell "Found stow: $(stow --version)"
+    else
         tell "Installing stow." 
         brew install stow
-    else
-        tell "Found stow: $(stow --version)"
     fi
 
     tell "get submodules"
@@ -40,12 +40,14 @@ install_mac() {
     stow git
 
     ######### (N)VIM ###########
-    if !command -v nvim >/dev/null 2>&1; then
+    if command -v nvim >/dev/null 2>&1; then
+        tell "Found neovim: $(nvim --version)"
+    else
         tell "Installing neovim." 
         brew install neovim --HEAD
-    else
-        tell "Found neovim: $(nvim --version)"
     fi
+
+    brew_install node
 
     tell "stowing vim..."
     stow vim
@@ -53,12 +55,12 @@ install_mac() {
 
 
 
-    ######### (N)VIM ###########
-    if !command -v tmux >/dev/null 2>&1; then
+    ######### tmux ###########
+    if command -v tmux >/dev/null 2>&1; then
+        tell "Found tmux: $(tmux --version)"
+    else
         tell "Installing tmux." 
         brew install tmux
-    else
-        tell "Found tmux: $(tmux --version)"
     fi
 
     tell "stowing tmux..."
@@ -80,25 +82,28 @@ install_mac() {
     brew_install htop
     brew_install tree
 
+    ### casks
+    brew cask install flux
+
     ########################## shells #########################
 
     ######### Fish ###########
-    if !command -v fish >/dev/null 2>&1; then
+    if command -v fish >/dev/null 2>&1; then
+        tell "Found fish: $(fish --version)"
+    else
         tell "Installing fish." 
         brew install fish
-    else
-        tell "Found fish: $(fish --version)"
     fi
 
     tell "stowing fish..."
     stow fish
 
     ######### zsh ###########
-    if !command -v zsh >/dev/null 2>&1; then
+    if command -v zsh >/dev/null 2>&1; then
+        tell "Found zsh: $(zsh --version)"
+    else
         tell "Installing zsh." 
         brew install zsh
-    else
-        tell "Found zsh: $(zsh --version)"
     fi
 
     tell "stowing zsh..."

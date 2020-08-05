@@ -1,8 +1,10 @@
 if status --is-interactive
-	tmux ^ /dev/null; and exec true
+    tmux ^ /dev/null; and exec true
 end
 
-set PATH /Users/zach/.cargo/bin/ $PATH
+set PATH ~/.cargo/bin/ $PATH
+set PATH ~/universe/experimental/bin $PATH
+set PATH ~/universe/bin $PATH
 
 set fish_greeting
 
@@ -27,6 +29,6 @@ else
 end
 
 if command -v nvim > /dev/null
-    alias vim 'nvim'
+    alias vim '~/nvim-osx64/bin/nvim'
     alias vi 'vim'
 end
